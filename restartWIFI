@@ -1,2 +1,6 @@
+#this is a work around to the problem that sometimes happens when resuming a laptop
+#that has gubuntu. At the moment of resuming the wifi interface is not quite working
+#the script restart the network manager service so the wifi works again...
+# usage:   ./restartWIFI
 #! /bin/bash
 sudo systemctl restart network-manager.service
