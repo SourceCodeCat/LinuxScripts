@@ -4,4 +4,14 @@
 #all pdf files recursively in the current directory
 # usage ./searchPdf text_to_search
 
-find . -name '*.pdf' -exec pdfgrep -n -i $1 {} +
+TEXT=$1
+DEPTH_SEARCH=$2
+DEPTH_LEVEL=$3
+
+if [ "$DEPTH_SEARCH" == "-d" ]; then
+	if [ $DEPTH_LEVEL -gt 0 ]; then
+		find . -maxdepth $DEPTH_LEVEL -name '*.pdf'  -exec pdfgrep -n -i $1 {} +	
+	fi
+else
+	find . -name '*.pdf'  -exec pdfgrep -n -i $1 {} +
+fi	
