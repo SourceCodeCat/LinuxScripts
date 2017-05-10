@@ -1,0 +1,3 @@
+# script to restart the bluetooth service, under ubuntu and Gnome
+#! /bin/bash
+sudo /etc/init.d/bluetooth restart
