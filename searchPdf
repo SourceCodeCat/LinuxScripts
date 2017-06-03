@@ -10,8 +10,13 @@ DEPTH_LEVEL=$3
 
 if [ "$DEPTH_SEARCH" == "-d" ]; then
 	if [ $DEPTH_LEVEL -gt 0 ]; then
+		echo "searching with depth limit --> $3"
 		find . -maxdepth $DEPTH_LEVEL -name '*.pdf'  -exec pdfgrep -n -i $1 {} +	
 	fi
+elif [ "$DEPTH_SEARCH" == "-h" ]; then
+	echo "to search recursively in all directories type ./searchPdf <text_to_search>"
+	echo "to search limiting the depth type ./searchPdf <text_toSearch> -d <depth_level> "
 else
+	echo "searching recursively..."
 	find . -name '*.pdf'  -exec pdfgrep -n -i $1 {} +
 fi	
