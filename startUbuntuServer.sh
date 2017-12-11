@@ -1,1 +1,1 @@
-VBoxManage startvm  ubuntuServer --type headless
+VBoxManage startvm  ubuntuServerClone --type headless
