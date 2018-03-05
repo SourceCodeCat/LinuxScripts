@@ -1,8 +1,14 @@
 #!/bin/sh
+#--------------------------------------------------------
+# The script is a template to install apps like eclipse,
+# Blender, or any other app that doesn't create a launcher
+# just customize the vars and  execute it. :)
+# by Marco Antonio Salgado Martinez, ing.marco@gmail.com
+#--------------------------------------------------------
 
 BASEDIR=$(pwd)
 #--------------------------------------------------------
-# Only modify these vars
+# Only modify these vars  as it seems fit.
 #--------------------------------------------------------
 PROGRAM_NAME="blender"
 LAUNCHER_NAME="Blender"
@@ -12,11 +18,10 @@ LAUNCHER_CTGRS="GNOME;GTK;Game;3DGraphics"
 LAUNCHER_CMTS="Create 3D images and Animate"
 ALIAS_NAME="blender"
 ICON="$BASEDIR/icons/scalable/apps/blender.svg"
+SYMLINK_NAME=$PROGRAM_NAME
 #--------------------------------------------------------
-
-TERMINAL_ALIAS_FLAG="$(grep -w "alias $ALIAS_NAME='$PROGRAM_NAME'" ~/.bashrc)"
-SYMLINK_NAME="$PROGRAM_NAME"
 SYMLINK_INSTALL_PATH="/bin/$SYMLINK_NAME"
+TERMINAL_ALIAS_FLAG="$(grep -w "alias $ALIAS_NAME='$SYMLINK_NAME'" ~/.bashrc)"
 echo "looking for an already created sym link.."
 TEMP="$(find /bin/ -name $SYMLINK_NAME)"
 
@@ -44,7 +49,7 @@ else
 	echo "Name=$LAUNCHER_NAME" >> $LAUNCHER_FILENAME
 	echo "Comment=$LAUNCHER_CMTS" >> $LAUNCHER_FILENAME
 	echo "Keywords=$LAUNCHER_KWDS" >> $LAUNCHER_FILENAME
-	echo "Exec=$PROGRAM_NAME" >> $LAUNCHER_FILENAME
+	echo "Exec=$SYMLINK_NAME" >> $LAUNCHER_FILENAME
 	echo "Icon=$ICON" >> $LAUNCHER_FILENAME
 	echo "Terminal=false" >> $LAUNCHER_FILENAME
 	echo "Type=Application" >> $LAUNCHER_FILENAME
@@ -62,12 +67,12 @@ then
         echo "alias not found... adding it..."
         echo "" >> ~/.bashrc
         echo "" >> ~/.bashrc        
-	echo "# alias for $PROGRAM_NAME :)" >> ~/.bashrc
-        echo "alias $ALIAS_NAME='$PROGRAM_NAME'" >> ~/.bashrc
+	echo "# alias for $SYMLINK_NAME :)" >> ~/.bashrc
+        echo "alias $ALIAS_NAME='$SYMLINK_NAME'" >> ~/.bashrc
         echo "done..."
 else
 	echo "alias already created..."
 fi
 echo ""
 echo ""
-echo "OK!... $PROGRAM_NAME can be launched by typing $PROGRAM_NAME in the terminal or the launcher :) remember to restart the terminal to launch it from there"
+echo "OK, Done!!... \n$PROGRAM_NAME can be launched by typing $ALIAS_NAME in the terminal or the launcher :) \nremember to restar the terminal to launch it from there"

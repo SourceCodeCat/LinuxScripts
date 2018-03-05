@@ -1,0 +1,42 @@
+#! /bin/bash
+
+# wake tray icon changer script wirtten by Marco A. Salgado Martinez
+# it may require major validations in the input options, but it is just
+# enough to get the job done...
+
+########################################################################
+# gets the current dir where the script is located..no matter from where
+# it was invocated, NOTE: only works if the file is not a symlink. It is
+# needed as there are two images local to the scrip that depending on the
+# choice we will copy either one...	
+
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+#########################################################################
+# where GUAKE is installed
+GUAKE_PATH="/usr/share/pixmaps/guake"
+#########################################################################
+
+
+echo "What guake version you want to use?..black or white?"
+read OPT
+
+# checks if an option has not been passed...(if len of $OPT is not zero)
+if [ ! -z "$OPT" ]
+then
+	echo "The option was $OPT"
+	echo "Verifiying if a backup is needed..."
+	BK=$(find $GUAKE_PATH -name guake-tray.BK.png)
+	# if the file was not found BK will be empty...	
+	if [ ! -z "$BK"  ]
+	then
+		echo "No backup needed..."
+	else
+		echo "Backing up original file to...guake-tray.BK.png"
+		$(sudo mv "$GUAKE_PATH/guake-tray.png" "$GUAKE_PATH/guake-tray.BK.png")
+	fi
+	$(sudo cp -f "$DIR/guake-tray_$OPT.png" "$GUAKE_PATH/guake-tray.png")	
+	echo "Done!... now restart wake"
+else
+	echo "No option was pased"
+	echo "Re-run the program and input either 'black' or 'white' (without the quotes)"
+fi
