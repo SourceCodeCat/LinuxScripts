@@ -1,0 +1,5 @@
+#!/bin/bash
+echo "The script removes the colored square in the file/folder name"
+echo "------------------------------------------------------------"
+
+chmod -R a-x,o-w,+X */ *
