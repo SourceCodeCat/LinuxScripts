@@ -1,0 +1,12 @@
+#! /bin/bash
+
+#The Script looks for files with executable permissions, in the current directory
+#the found  files then are moved to the directory indicated as a paramter to the script
+#Author Marco A. Salgado. ing.marco@gmail.com
+
+
+DEST=$1
+echo "Searching fro executable files & moving...."
+find . -maxdepth 1 -perm -111 -type f -exec mv '{}' $DEST \;
+echo "DEST: $DEST"
+echo "Done!.."
